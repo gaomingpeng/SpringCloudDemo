@@ -18,6 +18,7 @@ public class MovieController {
      private  String Url;
     @GetMapping("/user/{id}")
     public User findById(@PathVariable int  id){
+
         return this.restTemplate.getForObject(Url+id,User.class);
     }
 }
