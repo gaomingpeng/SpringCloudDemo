@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>EurekaServer</groupId>
-	<artifactId>EurekaServer</artifactId>
+	<groupId>EurekaServer1</groupId>
+	<artifactId>EurekaServer1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>EurekaServer</name>
+	<name>EurekaServer1</name>
 	<description>SpringCloudDemo project for Spring Boot</description>
 
 	<parent>
@@ -28,8 +28,20 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka-server</artifactId>
+			<!-- 去除此依赖防止把数据转换成xml格式，默认是json-->
+			<exclusions>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.dataformat</groupId>
+					<artifactId>jackson-dataformat-xml</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
+        <!-- 为 eureka server 添加用户认证的能力 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 		<!---actuator是spring boot提供的对应用系统的自省和监控的集成功能，
             可以对应用系统进行配置查看、相关功能统计等。-->
 		<dependency>
