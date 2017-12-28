@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>Provider</groupId>
-	<artifactId>Provider</artifactId>
+	<groupId>Provider2</groupId>
+	<artifactId>Provider2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>Provider</name>
+	<name>Provider2</name>
 	<description>SpringCloudDemo project for Spring Boot</description>
 
 	<parent>
@@ -68,7 +68,11 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka-server</artifactId>
 
+		</dependency>
 
 		<!-- 添加mysql驱动包 -->
 		<dependency>
@@ -97,7 +101,7 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-dependencies</artifactId>
-			<version>Camden.RELEASE</version>
+			<version>Dalston.SR1</version>
 			<type>pom</type>
 			<scope>import</scope>
 		</dependency>
