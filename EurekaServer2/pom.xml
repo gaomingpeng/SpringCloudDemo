@@ -28,13 +28,13 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka-server</artifactId>
-			<!-- 去除此依赖防止把数据转换成xml格式，默认是json-->
+		<!--	&lt;!&ndash; 去除此依赖防止把数据转换成xml格式，默认是json&ndash;&gt;
 			<exclusions>
 				<exclusion>
 					<groupId>com.fasterxml.jackson.dataformat</groupId>
 					<artifactId>jackson-dataformat-xml</artifactId>
 				</exclusion>
-			</exclusions>
+			</exclusions>-->
 		</dependency>
 		<!-- 为 eureka server 添加用户认证的能力 -->
 		<dependency>
