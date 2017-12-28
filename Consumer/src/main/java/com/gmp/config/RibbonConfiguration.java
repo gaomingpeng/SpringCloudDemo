@@ -1,4 +1,4 @@
-package com.gmp.ribboncfg;
+package com.gmp.config;
 
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RandomRule;

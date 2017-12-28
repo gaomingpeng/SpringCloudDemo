@@ -2,13 +2,14 @@ package com.gmp.user.controller;
 
 import com.gmp.user.entity.User;
 
+import com.gmp.user.feigninterface.FeignInterface;
+import com.gmp.user.feigninterface.UserFeignClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,14 +22,21 @@ public class MovieController {
 
     private  static  final Logger LOGGER = LoggerFactory.getLogger(MovieController.class);
 
-    @Autowired
-    private RestTemplate restTemplate;
+   /* @Autowired
+    private RestTemplate restTemplate;*/
+
 
     @Autowired
     private DiscoveryClient discoveryClient;
 
     @Autowired
     private LoadBalancerClient loadBalancerClient;
+
+    @Autowired
+    private UserFeignClient userFeignClient;
+
+   @Autowired
+    private FeignInterface feignInterface;
 
     @Value("${Url}")
      private  String Url;
@@ -39,7 +47,14 @@ public class MovieController {
    // @GetMapping( value = "/user/{id}", produces = { "application/json;charset=UTF-8" })
     @GetMapping("/user/{id}")
     public User findById(@PathVariable int  id){
-        return this.restTemplate.getForObject(Url+id,User.class);
+       // return this.restTemplate.getForObject(Url+id,User.class);
+       return this.userFeignClient.findByID(id);//这里不仅实现了声明式的调用还实现了负载均衡
+    }
+
+   @GetMapping("/user2/{id}")
+    public User findById2(@PathVariable int  id){
+      //在此加上了feign日志
+        return this.feignInterface.findById(id);
     }
     @GetMapping("/loginstance")
     public void logUserInstance(){
