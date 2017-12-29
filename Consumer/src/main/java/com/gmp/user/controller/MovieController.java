@@ -4,6 +4,7 @@ import com.gmp.user.entity.User;
 
 import com.gmp.user.feigninterface.FeignInterface;
 import com.gmp.user.feigninterface.UserFeignClient;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,7 @@ public class MovieController {
 
    // @GetMapping( value = "/user/{id}", produces = { "application/json;charset=UTF-8" })
     @GetMapping("/user/{id}")
+    @HystrixCommand(fallbackMethod = "findByIdFaileback")
     public User findById(@PathVariable int  id){
        // return this.restTemplate.getForObject(Url+id,User.class);
        return this.userFeignClient.findByID(id);//这里不仅实现了声明式的调用还实现了负载均衡
@@ -67,5 +69,12 @@ public class MovieController {
     @GetMapping("/provider")
     public List<ServiceInstance>  showInfo(){
         return  this.discoveryClient.getInstances("provider");
+    }
+
+    public User findByIdFaileback(int id){
+        User user = new User();
+        user.setName("服务异常，请求超时");
+        user.setId(1);
+        return  user;
     }
 }
