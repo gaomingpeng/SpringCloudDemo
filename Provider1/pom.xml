@@ -68,18 +68,7 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka-server</artifactId>
-			<!-- 去除此依赖防止把数据转换成xml格式，默认是json-->
-     <exclusions>
-			   <exclusion>
-				   <groupId>com.fasterxml.jackson.jaxrs</groupId>
-				   <artifactId>jackson-jaxrs-xml-provider</artifactId>
-			   </exclusion>
-		   </exclusions>
 
-		</dependency>
 
 		<!-- 添加mysql驱动包 -->
 		<dependency>
